@@ -105,7 +105,8 @@ public class MainActivity extends AppCompatActivity {
         } finally {
             cursor.close();
         }
-
+        // FIXME: 12/3/17 You are closing the cursor object before returning it. As a result,
+        // the method which will receive the Cursor will not be able to use it. You need to simplify this method to return after the line 77.
         return cursor;
     }
 
