@@ -54,7 +54,7 @@
             android:id="@+id/product_sell_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="sell 1 piece"
+            android:text="sell"
             android:layout_gravity="right"
             style="@style/ButtonSellStyle"
             android:layout_marginBottom="8dp"

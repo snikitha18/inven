@@ -1,5 +1,6 @@
 package com.mzdhr.bookstoreinventoryapp.ui;
 
+import android.app.ActionBar;
 import android.app.LoaderManager;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -56,12 +57,19 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        try {
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setIcon(R.drawable.ic_book);
+        } catch (NullPointerException e){
+
+        }
+
         // FindViews
         mListView = (ListView) findViewById(R.id.list);
         mEmptyStatView = (LinearLayout) findViewById(R.id.empty_view);
         mEmptyStateImageView = (ImageView) findViewById(R.id.empty_image_view);
         mEmptyStateTextView = (TextView) findViewById(R.id.empty_view_text);
-        mFloatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
+        //mFloatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
 
         // Preparing Adapter
         mAdapter = new ProductAdapter(this, null);
@@ -72,13 +80,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mListView.setEmptyView(mEmptyStatView);
 
         // Set listener to the button
-        mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AddActivity.class);
-                startActivity(intent);
-            }
-        });
+//        mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, AddActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
         getLoaderManager().initLoader(ALL_PRODUCT_LOADER, null, this);
     }

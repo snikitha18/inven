@@ -67,17 +67,17 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
         // Hide the keyboard when activity start
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-        mEditImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mModeEdit){
-                    disableEditing();
-                    saveChanges();
-                } else {
-                    enableEditing();
-                }
-            }
-        });
+//        mEditImageButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (mModeEdit){
+//                    disableEditing();
+//                    saveChanges();
+//                } else {
+//                    enableEditing();
+//                }
+//            }
+//        });
 
         mQuantityMinusButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,19 +93,19 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
             }
         });
         
-        mDeleteThisProductButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deleteConfirmation();
-            }
-        });
+//        mDeleteThisProductButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                deleteConfirmation();
+//            }
+//        });
 
         // Trigger the Loader
         getLoaderManager().initLoader(PRODUCT_SINGLE_LOADER, null, this);
     }
     
     private void findViews() {
-        mEditImageButton = (ImageView) findViewById(R.id.pen_edit_image_view);
+        //mEditImageButton = (ImageView) findViewById(R.id.pen_edit_image_view);
         mProductNameEditText = (EditText) findViewById(R.id.product_name_edit_text);
         mProductPriceEditText = (EditText) findViewById(R.id.product_price_edit_view);
         mProductQuantityEditText = (EditText) findViewById(R.id.product_quantity_edit_view);
@@ -114,8 +114,8 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
         mSupplierNameEditText = (EditText) findViewById(R.id.supplier_name_edit_text);
         mSupplierPhoneEditText = (EditText) findViewById(R.id.supplier_phone_edit_text);
         mSupplierEmailEditText = (EditText) findViewById(R.id.supplier_email_edit_text);
-        mOrderFromSupplierButton = (Button) findViewById(R.id.order_more_product_button);
-        mDeleteThisProductButton = (Button) findViewById(R.id.delete_product_button);
+        //mOrderFromSupplierButton = (Button) findViewById(R.id.order_more_product_button);
+        //mDeleteThisProductButton = (Button) findViewById(R.id.delete_product_button);
     }
     
     private void removeQuantity() {
