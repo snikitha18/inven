@@ -1,6 +1,7 @@
 package com.mzdhr.bookstoreinventoryapp.ui;
 
 import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.app.LoaderManager;
 import android.content.ContentValues;
 import android.content.CursorLoader;
@@ -46,8 +47,8 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
     private EditText mSupplierNameEditText;
     private EditText mSupplierPhoneEditText;
     private EditText mSupplierEmailEditText;
-    private Button mOrderFromSupplierButton;
-    private Button mDeleteThisProductButton;
+    //private Button mOrderFromSupplierButton;
+    //private Button mDeleteThisProductButton;
 
 
     @Override
@@ -150,8 +151,8 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
         mSupplierNameEditText.setEnabled(false);
         mSupplierPhoneEditText.setEnabled(false);
         mSupplierEmailEditText.setEnabled(false);
-        mOrderFromSupplierButton.setEnabled(false);
-        mDeleteThisProductButton.setEnabled(false);
+        //mOrderFromSupplierButton.setEnabled(false);
+        //mDeleteThisProductButton.setEnabled(false);
         mModeEdit = false;
     }
 
@@ -165,8 +166,8 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
         mSupplierNameEditText.setEnabled(true);
         mSupplierPhoneEditText.setEnabled(true);
         mSupplierEmailEditText.setEnabled(true);
-        mOrderFromSupplierButton.setEnabled(true);
-        mDeleteThisProductButton.setEnabled(true);
+        //mOrderFromSupplierButton.setEnabled(true);
+        //mDeleteThisProductButton.setEnabled(true);
         mModeEdit = true;
     }
 
@@ -238,6 +239,8 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
             Toast.makeText(this, "Changes Saved", Toast.LENGTH_SHORT).show();
         }
 
+        disableEditing();
+        mEditIconMenuItem.setIcon(R.drawable.ic_edit);
     }
     
     private void deleteConfirmation() {
@@ -277,6 +280,47 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
         finish();
     }
 
+    private void orderMore() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.contact_supplier_title);
+        builder.setMessage(R.string.contact_supplier_sub_title);
+        builder.setNegativeButton(R.string.by_phone, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String supplierPhone = mSupplierPhoneEditText.getText().toString();
+
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + supplierPhone));
+                if (!TextUtils.isEmpty(supplierPhone)){
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(DetailsActivity.this, R.string.no_phone, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+        builder.setPositiveButton(R.string.by_email, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String supplierEmail = mSupplierEmailEditText.getText().toString();
+                String productName = mProductNameEditText.getText().toString();
+
+                Intent intent = new Intent(android.content.Intent.ACTION_SENDTO);
+                intent.setType("text/plain");
+                intent.setData(Uri.parse("mailto:" + supplierEmail));
+                intent.putExtra(android.content.Intent.EXTRA_SUBJECT, getString(R.string.order_more_product));
+                String bodyMessage = getString(R.string.order_more_product_sub) + productName;
+                intent.putExtra(android.content.Intent.EXTRA_TEXT, bodyMessage);
+                startActivity(intent);
+
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
     // --------------
     // Menu Section
     // --------------
@@ -293,9 +337,9 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
         switch (item.getItemId()) {
             case R.id.edit_book_menu_button:
                 if (mModeEdit){
-                    disableEditing();
                     saveChanges();
-                    mEditIconMenuItem.setIcon(R.drawable.ic_edit);
+//                    disableEditing();
+//                    mEditIconMenuItem.setIcon(R.drawable.ic_edit);
                 } else {
                     enableEditing();
                     mEditIconMenuItem.setIcon(R.drawable.ic_save);
@@ -308,6 +352,7 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
 
             case R.id.order_more_book_menu_button:
                 // TODO: 12/6/17 Contact the supplier Dialog, by mail or phone!
+                orderMore();
                 break;
         }
         return super.onOptionsItemSelected(item);

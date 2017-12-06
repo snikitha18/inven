@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Book Inventory</string>
-    <string name="empty_products_text">Inventory Is Empty</string>
+    <string name="empty_products_text">Inventory Is Empty!\n Use above button [+] to add a book.</string>
     <string name="title_activity_add">Add Book</string>
     <string name="title_activity_details">Details</string>
     <string name="delete_message">Do You Want To Delete This Book?</string>
@@ -8,4 +8,11 @@
     <string name="no_delete">No</string>
     <string name="delete_failed">Delete Failed!</string>
     <string name="delete_successful">Delete Successful</string>
+    <string name="by_phone">By Phone</string>
+    <string name="by_email">By Email</string>
+    <string name="no_phone">No Phone Number Found!</string>
+    <string name="contact_supplier_title">Contact Supplier To Order More</string>
+    <string name="contact_supplier_sub_title">Which Method Do You Prefer?</string>
+    <string name="order_more_product">Ordering More Product</string>
+    <string name="order_more_product_sub">We want to order more of</string>
 </resources>

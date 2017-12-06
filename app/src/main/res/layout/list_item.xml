@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="@color/colorListItemBackground"
-              android:padding="8dp"
-    >
+              android:padding="8dp">
 
         <TextView
             android:id="@+id/product_name_text_view"
@@ -14,15 +13,18 @@
             android:paddingTop="8dp"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
-            android:text="Invisible"
+            android:text="Invisible Title Title fkdsjf dslfjldsj fldsjf jdsjfds"
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="@color/colorListItemProductName"
             android:fontFamily="sans-serif"
+            android:layout_alignParentTop="true"
+            android:maxLines="1"
             />
 
-    <TextView
+        <TextView
         android:id="@+id/product_price_text_view"
+        android:layout_below="@id/product_name_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
@@ -37,6 +39,7 @@
 
         <TextView
             android:id="@+id/product_quantity_text_view"
+            android:layout_below="@id/product_price_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="8dp"
@@ -47,19 +50,23 @@
             android:textStyle="normal"
             android:textColor="@color/colorListItemProductSubText"
             android:fontFamily="sans-serif"
+            android:layout_marginBottom="16dp"
             />
 
 
         <Button
             android:id="@+id/product_sell_button"
+            android:layout_below="@id/product_name_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="sell"
             android:layout_gravity="right"
             style="@style/ButtonSellStyle"
             android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_alignParentRight="true"
             />
 
 
 
-</LinearLayout>
+</RelativeLayout>

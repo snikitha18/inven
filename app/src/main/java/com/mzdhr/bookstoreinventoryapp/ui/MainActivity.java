@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 projection,
                 null,   // Selection
                 null,   // SelectionArgs
-                null    // Order
+                ProductEntry.COLUMN_PRODUCT_NAME    // Order by alphabetical.
         );
     }
 

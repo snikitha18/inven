@@ -33,6 +33,7 @@
         android:layout_height="wrap_content"
         style="@style/InputStyleMaterial"
         android:inputType="text"
+        android:hint="Example: a book title."
         />
 
     <TextView
@@ -47,7 +48,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/InputStyleMaterial"
-        android:inputType="number"/>
+        android:inputType="number"
+        android:hint="108"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -68,7 +70,8 @@
             android:layout_height="wrap_content"
             style="@style/InputStyleMaterial"
             android:inputType="number"
-            android:layout_weight="4"/>
+            android:layout_weight="4"
+            android:hint="3"/>
 
         <Button
             android:id="@+id/product_quantity_minus_button"
@@ -101,6 +104,7 @@
         android:layout_height="wrap_content"
         style="@style/InputStyleMaterial"
         android:inputType="text"
+        android:hint="Amazon"
         />
 
     <TextView
@@ -116,6 +120,7 @@
         android:layout_height="wrap_content"
         style="@style/InputStyleMaterial"
         android:inputType="phone"
+        android:hint="00 1 206-266-2992"
         />
 
     <TextView
@@ -131,6 +136,7 @@
         android:layout_height="wrap_content"
         style="@style/InputStyleMaterial"
         android:inputType="textEmailAddress"
+        android:hint="support@amazon.com"
         />
 
     <LinearLayout
