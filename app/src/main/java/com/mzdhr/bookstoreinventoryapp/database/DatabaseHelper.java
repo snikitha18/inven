@@ -15,6 +15,7 @@ import com.mzdhr.bookstoreinventoryapp.database.DatabaseContract.ProductEntry;
  */
 
 public class DatabaseHelper extends SQLiteOpenHelper {
+
     // Constants
     private static final String TAG = DatabaseHelper.class.getSimpleName();
     private static final String DATABASE_NAME = "productdatabase.db";

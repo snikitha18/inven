@@ -20,7 +20,6 @@ public class DatabaseProvider extends ContentProvider{
 
     private static final int PRODUCTS = 88;
     private static final int PRODUCT_SINGLE = 44;
-
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
     private static final String TAG = DatabaseProvider.class.getSimpleName();
 
@@ -74,6 +73,7 @@ public class DatabaseProvider extends ContentProvider{
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
         final int match = sUriMatcher.match(uri);
         switch (match){
+
             case PRODUCTS:
                 return insertProduct(uri, values);
 
@@ -88,12 +88,8 @@ public class DatabaseProvider extends ContentProvider{
         SQLiteDatabase database = mDatabaseHelper.getWritableDatabase();
         int rowsDeleted;
         switch (match) {
-//            case PRODUCTS:
-//                Log.d(TAG, "update: Products delatoin triggered!");
-//                rowsDeleted = database.delete(DatabaseContract.ProductEntry.PRODUCT_TABLE_NAME, selection, selectionArgs);
-//                break;
+
             case PRODUCT_SINGLE:
-                // Delete a single row given by the ID in the URI
                 selection = DatabaseContract.ProductEntry._ID + "=?";
                 selectionArgs = new String[] { String.valueOf(ContentUris.parseId(uri)) };
                 rowsDeleted = database.delete(DatabaseContract.ProductEntry.PRODUCT_TABLE_NAME, selection, selectionArgs);
@@ -114,6 +110,7 @@ public class DatabaseProvider extends ContentProvider{
     public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
         final int match = sUriMatcher.match(uri);
         switch (match){
+
             case PRODUCT_SINGLE:
                 selection = DatabaseContract.ProductEntry._ID + "=?";
                 selectionArgs = new String[] {String.valueOf(ContentUris.parseId(uri))};
@@ -125,8 +122,7 @@ public class DatabaseProvider extends ContentProvider{
 
     }
 
-
-    // Insertion Methods
+    // Helper Methods
     private Uri insertProduct(Uri uri, ContentValues values) {
         SQLiteDatabase database = mDatabaseHelper.getWritableDatabase();
         long id = database.insert(DatabaseContract.ProductEntry.PRODUCT_TABLE_NAME, null, values);
@@ -134,7 +130,7 @@ public class DatabaseProvider extends ContentProvider{
             Log.d(TAG, "insertProduct: Failed to insert row for " + uri);
         }
 
-        // notify that calling context
+        // Notify that calling context
         getContext().getContentResolver().notifyChange(uri, null);
         return ContentUris.withAppendedId(uri, id);
     }
