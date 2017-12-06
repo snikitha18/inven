@@ -38,7 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + ProductEntry.COLUMN_PRODUCT_IMAGE + " INTEGER NOT NULL DEFAULT 0, "
                 + ProductEntry.COLUMN_PRODUCT_SUPPLIER_NAME + " TEXT NOT NULL DEFAULT '', "
                 + ProductEntry.COLUMN_PRODUCT_SUPPLIER_EMAIL + " TEXT NOT NULL DEFAULT '', "
-                + ProductEntry.COLUMN_PRODUCT_SUPPLIER_PHONE_NUMBER + " TEXT NOT NULL DEFAULT '0' );";
+                + ProductEntry.COLUMN_PRODUCT_SUPPLIER_PHONE_NUMBER + " TEXT NOT NULL DEFAULT '0');";
 
         db.execSQL(SQL_CREATE_PRODUCT_TABLE);
     }

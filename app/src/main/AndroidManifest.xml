@@ -9,12 +9,37 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+
+        <!-- database provider or it will return null for the cursor -->
+        <provider
+            android:name=".database.DatabaseProvider"
+            android:authorities="com.mzdhr.bookstoreinventoryapp"
+            android:exported="false"/>
+
+        <activity
+            android:name=".ui.AddActivity"
+            android:label="@string/title_activity_add"
+            android:parentActivityName=".ui.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mzdhr.bookstoreinventoryapp.ui.MainActivity"/>
+        </activity>
+        <activity
+            android:name=".ui.DetailsActivity"
+            android:label="@string/title_activity_details"
+            android:parentActivityName=".ui.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mzdhr.bookstoreinventoryapp.ui.MainActivity"/>
         </activity>
     </application>
 
