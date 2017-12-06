@@ -53,7 +53,6 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        Toast.makeText(getApplicationContext(), "Test string", Toast.LENGTH_SHORT).show();
 
         Intent intent = getIntent();
         mCurrentProductUri = intent.getData();

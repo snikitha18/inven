@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mFloatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
 
         // Preparing Adapter
-        mAdapter = new ProductAdapter(this);
+        mAdapter = new ProductAdapter(this, null);
 
         // Preparing ListView, and setting Adapter and Empty-View to it.
         mProducts = new ArrayList<>();
@@ -117,46 +117,49 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        mProducts.clear();
-        mAdapter.clear();
+        mAdapter.swapCursor(cursor);
 
-        if (cursor == null || cursor.getCount() < 1) {
-            Log.d(TAG, "onLoadFinished: Cursor is null or there is less than 1 row in the cursor");
-            // Setting the Empty State view
-            mEmptyStateTextView.setText(R.string.no_product_found_text);
-            mEmptyStateImageView.setImageResource(R.drawable.no_product_found);
-            return;
-        }
 
-        // Loop through data that cursor has.
-        while (cursor.moveToNext()) {
-            int currentID = cursor.getInt(cursor.getColumnIndex(ProductEntry._ID));
-            String productName = cursor.getString(cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_NAME));
-            int productPrice = cursor.getInt(cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_PRICE));
-            int productQuantity = cursor.getInt(cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_QUANTITY));
-            int productImage = cursor.getInt(cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_IMAGE));
-            String productSupplierName = cursor.getString(cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_SUPPLIER_NAME));
-            String productSupplierEmail = cursor.getString(cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_SUPPLIER_EMAIL));
-            String productSupplierPhoneNumber = cursor.getString(cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_SUPPLIER_PHONE_NUMBER));
-
-            Product product = new Product(
-                    currentID,
-                    productName,
-                    productPrice,
-                    productQuantity,
-                    productImage,
-                    productSupplierName,
-                    productSupplierEmail,
-                    productSupplierPhoneNumber);
-
-            mProducts.add(0, product);
-        }
-
-        mAdapter.addAll(mProducts);
+//        mProducts.clear();
+//        mAdapter.clear();
+//
+//        if (cursor == null || cursor.getCount() < 1) {
+//            Log.d(TAG, "onLoadFinished: Cursor is null or there is less than 1 row in the cursor");
+//            // Setting the Empty State view
+//            mEmptyStateTextView.setText(R.string.no_product_found_text);
+//            mEmptyStateImageView.setImageResource(R.drawable.no_product_found);
+//            return;
+//        }
+//
+//        // Loop through data that cursor has.
+//        while (cursor.moveToNext()) {
+//            int currentID = cursor.getInt(cursor.getColumnIndex(ProductEntry._ID));
+//            String productName = cursor.getString(cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_NAME));
+//            int productPrice = cursor.getInt(cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_PRICE));
+//            int productQuantity = cursor.getInt(cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_QUANTITY));
+//            int productImage = cursor.getInt(cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_IMAGE));
+//            String productSupplierName = cursor.getString(cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_SUPPLIER_NAME));
+//            String productSupplierEmail = cursor.getString(cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_SUPPLIER_EMAIL));
+//            String productSupplierPhoneNumber = cursor.getString(cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_SUPPLIER_PHONE_NUMBER));
+//
+//            Product product = new Product(
+//                    currentID,
+//                    productName,
+//                    productPrice,
+//                    productQuantity,
+//                    productImage,
+//                    productSupplierName,
+//                    productSupplierEmail,
+//                    productSupplierPhoneNumber);
+//
+//            mProducts.add(0, product);
+//        }
+//
+//        mAdapter.addAll(mProducts);
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-
+        mAdapter.swapCursor(null);
     }
 }

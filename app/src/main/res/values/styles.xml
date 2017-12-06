@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
 
         <!--change actionbar text color-->
-        <item name="titleTextColor">#605F5F</item>
+        <item name="titleTextColor">@color/colorActionBarTitle</item>
 
         <!--making actionbar neat-->
         <item name="actionBarSize">48dip</item>
