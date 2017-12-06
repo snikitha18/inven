@@ -1,12 +1,8 @@
 package com.mzdhr.bookstoreinventoryapp.ui;
 
 import android.content.ContentValues;
-import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -17,13 +13,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.mzdhr.bookstoreinventoryapp.R;
 import com.mzdhr.bookstoreinventoryapp.database.DatabaseContract;
 
 public class AddActivity extends AppCompatActivity {
 
+    // Objects
     private static final String TAG = AddActivity.class.getSimpleName();
+
     // Views
     private EditText mProductNameEditText;
     private EditText mProductPriceEditText;
@@ -33,24 +30,21 @@ public class AddActivity extends AppCompatActivity {
     private EditText mSupplierNameEditText;
     private EditText mSupplierPhoneEditText;
     private EditText mSupplierEmailEditText;
-    private Button mAddProductImageButton;
-    private Button mAddProductButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        findViews();
 
-        mAddProductButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addProduct();
-            }
-        });
+        try {
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        } catch (Exception e){
+            Log.d(TAG, "onCreate: " + e);
+        }
+
+        findViews();
 
         mQuantityMinusButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,19 +52,10 @@ public class AddActivity extends AppCompatActivity {
                 removeQuantity();
             }
         });
-
         mQuantityPlusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 addQuantity();
-            }
-        });
-
-        mAddProductImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // this is not required
-                Toast.makeText(AddActivity.this, "Image Added!", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -84,8 +69,6 @@ public class AddActivity extends AppCompatActivity {
         mSupplierNameEditText = (EditText) findViewById(R.id.supplier_name_edit_text);
         mSupplierPhoneEditText = (EditText) findViewById(R.id.supplier_phone_edit_text);
         mSupplierEmailEditText = (EditText) findViewById(R.id.supplier_email_edit_text);
-        mAddProductImageButton = (Button) findViewById(R.id.add_product_image_button);
-        mAddProductButton = (Button) findViewById(R.id.add_product_button);
     }
 
     private void removeQuantity() {
@@ -98,7 +81,7 @@ public class AddActivity extends AppCompatActivity {
             currentQuantity--;
             mProductQuantityEditText.setText(String.valueOf(currentQuantity));
         } else {
-            Toast.makeText(this, "Can not set negative quantity", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.can_not_set_negative_quantity, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -121,27 +104,27 @@ public class AddActivity extends AppCompatActivity {
 
         // Checking values are not empty
         if (TextUtils.isEmpty(productName)) {
-            Toast.makeText(this, "Please Fill Product Name", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.please_fill_product_name, Toast.LENGTH_SHORT).show();
             return;
         }
         if (TextUtils.isEmpty(productPrice)) {
-            Toast.makeText(this, "Please Fill Price Name", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.please_fill_price, Toast.LENGTH_SHORT).show();
             return;
         }
         if (TextUtils.isEmpty(productQuantity)) {
-            Toast.makeText(this, "Please Fill Quantity Name", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.please_fill_quantity, Toast.LENGTH_SHORT).show();
             return;
         }
         if (TextUtils.isEmpty(supplierName)) {
-            Toast.makeText(this, "Please Fill Supplier Name", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.please_fill_supplier_name, Toast.LENGTH_SHORT).show();
             return;
         }
         if (TextUtils.isEmpty(supplierPhone)) {
-            Toast.makeText(this, "Please Fill Supplier Phone", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.please_fill_supplier_phone, Toast.LENGTH_SHORT).show();
             return;
         }
         if (TextUtils.isEmpty(supplierEmail)) {
-            Toast.makeText(this, "Please Fill Suppler Email", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.please_fill_supplier_email, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -160,19 +143,18 @@ public class AddActivity extends AppCompatActivity {
         // Checking Insert
         if (insertUri == null){
             Log.d(TAG, "addProduct: Insert Failed!");
-            Toast.makeText(this, "Failed Insertion a Product Record", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.saved_failed, Toast.LENGTH_SHORT).show();
         } else {
             Log.d(TAG, "addProduct: Insert Successful");
+            Toast.makeText(this, R.string.saved_successful, Toast.LENGTH_SHORT).show();
         }
 
         finish();
     }
 
-
     // --------------
     // Menu Section
     // --------------
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.add_activity_menu, menu);
@@ -183,7 +165,7 @@ public class AddActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add_image_book_menu_button:
-                Toast.makeText(AddActivity.this, "Image Added!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddActivity.this, R.string.image_added, Toast.LENGTH_SHORT).show();
                 break;
             case R.id.save_book_menu_button:
                 addProduct();

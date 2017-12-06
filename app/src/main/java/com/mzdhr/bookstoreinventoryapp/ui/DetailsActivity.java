@@ -1,7 +1,6 @@
 package com.mzdhr.bookstoreinventoryapp.ui;
 
 import android.app.AlertDialog;
-import android.app.DialogFragment;
 import android.app.LoaderManager;
 import android.content.ContentValues;
 import android.content.CursorLoader;
@@ -21,9 +20,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.mzdhr.bookstoreinventoryapp.R;
 import com.mzdhr.bookstoreinventoryapp.database.DatabaseContract;
 
@@ -34,11 +31,9 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
     private static final int PRODUCT_SINGLE_LOADER = 1010;
     private boolean mModeEdit;
     private Uri mCurrentProductUri;
-
     private MenuItem mEditIconMenuItem;
 
     // Views
-    private ImageView mEditImageButton;
     private EditText mProductNameEditText;
     private EditText mProductPriceEditText;
     private EditText mProductQuantityEditText;
@@ -47,9 +42,6 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
     private EditText mSupplierNameEditText;
     private EditText mSupplierPhoneEditText;
     private EditText mSupplierEmailEditText;
-    //private Button mOrderFromSupplierButton;
-    //private Button mDeleteThisProductButton;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,26 +51,14 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Intent intent = getIntent();
-        mCurrentProductUri = intent.getData();
-
         findViews();
-        //disableEditing();
 
         // Hide the keyboard when activity start
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-//        mEditImageButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (mModeEdit){
-//                    disableEditing();
-//                    saveChanges();
-//                } else {
-//                    enableEditing();
-//                }
-//            }
-//        });
+        // Getting Data Uri from the coming Intent
+        Intent intent = getIntent();
+        mCurrentProductUri = intent.getData();
 
         mQuantityMinusButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,27 +66,18 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
                 removeQuantity();
             }
         });
-
         mQuantityPlusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 addQuantity();
             }
         });
-        
-//        mDeleteThisProductButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                deleteConfirmation();
-//            }
-//        });
 
         // Trigger the Loader
         getLoaderManager().initLoader(PRODUCT_SINGLE_LOADER, null, this);
     }
     
     private void findViews() {
-        //mEditImageButton = (ImageView) findViewById(R.id.pen_edit_image_view);
         mProductNameEditText = (EditText) findViewById(R.id.product_name_edit_text);
         mProductPriceEditText = (EditText) findViewById(R.id.product_price_edit_view);
         mProductQuantityEditText = (EditText) findViewById(R.id.product_quantity_edit_view);
@@ -115,8 +86,6 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
         mSupplierNameEditText = (EditText) findViewById(R.id.supplier_name_edit_text);
         mSupplierPhoneEditText = (EditText) findViewById(R.id.supplier_phone_edit_text);
         mSupplierEmailEditText = (EditText) findViewById(R.id.supplier_email_edit_text);
-        //mOrderFromSupplierButton = (Button) findViewById(R.id.order_more_product_button);
-        //mDeleteThisProductButton = (Button) findViewById(R.id.delete_product_button);
     }
     
     private void removeQuantity() {
@@ -129,7 +98,7 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
             currentQuantity--;
             mProductQuantityEditText.setText(String.valueOf(currentQuantity));
         } else {
-            Toast.makeText(this, "Can not set negative quantity", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.can_not_set_negative_quantity, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -151,8 +120,6 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
         mSupplierNameEditText.setEnabled(false);
         mSupplierPhoneEditText.setEnabled(false);
         mSupplierEmailEditText.setEnabled(false);
-        //mOrderFromSupplierButton.setEnabled(false);
-        //mDeleteThisProductButton.setEnabled(false);
         mModeEdit = false;
     }
 
@@ -166,8 +133,6 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
         mSupplierNameEditText.setEnabled(true);
         mSupplierPhoneEditText.setEnabled(true);
         mSupplierEmailEditText.setEnabled(true);
-        //mOrderFromSupplierButton.setEnabled(true);
-        //mDeleteThisProductButton.setEnabled(true);
         mModeEdit = true;
     }
 
@@ -181,32 +146,32 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
 
         // Checking values are not empty
         if (TextUtils.isEmpty(productName)) {
-            Toast.makeText(this, "Please Fill Product Name", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.please_fill_product_name, Toast.LENGTH_SHORT).show();
             enableEditing();
             return;
         }
         if (TextUtils.isEmpty(productPrice)) {
-            Toast.makeText(this, "Please Fill Price Name", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.please_fill_price, Toast.LENGTH_SHORT).show();
             enableEditing();
             return;
         }
         if (TextUtils.isEmpty(productQuantity)) {
-            Toast.makeText(this, "Please Fill Quantity Name", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.please_fill_quantity, Toast.LENGTH_SHORT).show();
             enableEditing();
             return;
         }
         if (TextUtils.isEmpty(supplierName)) {
-            Toast.makeText(this, "Please Fill Supplier Name", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.please_fill_supplier_name, Toast.LENGTH_SHORT).show();
             enableEditing();
             return;
         }
         if (TextUtils.isEmpty(supplierPhone)) {
-            Toast.makeText(this, "Please Fill Supplier Phone", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.please_fill_supplier_phone, Toast.LENGTH_SHORT).show();
             enableEditing();
             return;
         }
         if (TextUtils.isEmpty(supplierEmail)) {
-            Toast.makeText(this, "Please Fill Suppler Email", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.please_fill_supplier_email, Toast.LENGTH_SHORT).show();
             enableEditing();
             return;
         }
@@ -225,7 +190,7 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
         int insertUri = getContentResolver().update(mCurrentProductUri, values, null, null);
         // Checking Insert
         if (insertUri == 0){
-            Toast.makeText(this, "Changes Unsaved!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.saved_failed, Toast.LENGTH_SHORT).show();
         } else {
             Log.d(TAG, "saveChanges: Update Successful");
             // Update the UI to the new values
@@ -236,7 +201,7 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
             mSupplierPhoneEditText.setText(supplierPhone);
             mSupplierEmailEditText.setText(supplierEmail);
             // Notify the user
-            Toast.makeText(this, "Changes Saved", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.saved_successful, Toast.LENGTH_SHORT).show();
         }
 
         disableEditing();
@@ -284,6 +249,7 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.contact_supplier_title);
         builder.setMessage(R.string.contact_supplier_sub_title);
+
         builder.setNegativeButton(R.string.by_phone, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -324,7 +290,6 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
     // --------------
     // Menu Section
     // --------------
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.details_activity_menu, menu);
@@ -335,11 +300,10 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+
             case R.id.edit_book_menu_button:
                 if (mModeEdit){
                     saveChanges();
-//                    disableEditing();
-//                    mEditIconMenuItem.setIcon(R.drawable.ic_edit);
                 } else {
                     enableEditing();
                     mEditIconMenuItem.setIcon(R.drawable.ic_save);
@@ -351,13 +315,11 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
                 break;
 
             case R.id.order_more_book_menu_button:
-                // TODO: 12/6/17 Contact the supplier Dialog, by mail or phone!
                 orderMore();
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
-
 
     // --------------
     // Loader Section
@@ -391,11 +353,9 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
         }
 
         if (cursor.moveToFirst()) {
-            int currentID = cursor.getInt(cursor.getColumnIndex(DatabaseContract.ProductEntry._ID));
             String productName = cursor.getString(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_PRODUCT_NAME));
             int productPrice = cursor.getInt(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_PRODUCT_PRICE));
             int productQuantity = cursor.getInt(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_PRODUCT_QUANTITY));
-            int productImage = cursor.getInt(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_PRODUCT_IMAGE));
             String productSupplierName = cursor.getString(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_PRODUCT_SUPPLIER_NAME));
             String productSupplierEmail = cursor.getString(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_PRODUCT_SUPPLIER_EMAIL));
             String productSupplierPhoneNumber = cursor.getString(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_PRODUCT_SUPPLIER_PHONE_NUMBER));
@@ -412,8 +372,6 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-
     }
-
 
 }

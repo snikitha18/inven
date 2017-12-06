@@ -15,4 +15,14 @@
     <string name="contact_supplier_sub_title">Which Method Do You Prefer?</string>
     <string name="order_more_product">Ordering More Product</string>
     <string name="order_more_product_sub">We want to order more of</string>
+    <string name="can_not_set_negative_quantity">Can not set negative quantity</string>
+    <string name="please_fill_product_name">Please Fill Product Name</string>
+    <string name="please_fill_price">Please Fill Price</string>
+    <string name="please_fill_quantity">Please Fill Quantity</string>
+    <string name="please_fill_supplier_name">Please Fill Supplier Name</string>
+    <string name="please_fill_supplier_phone">Please Fill Supplier Phone</string>
+    <string name="please_fill_supplier_email">Please Fill Suppler Email</string>
+    <string name="saved_failed">Failed To Save!</string>
+    <string name="saved_successful">Saved Successful</string>
+    <string name="image_added">Image Added!</string>
 </resources>

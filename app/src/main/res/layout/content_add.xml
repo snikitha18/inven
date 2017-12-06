@@ -139,31 +139,6 @@
         android:hint="support@amazon.com"
         />
 
-    <LinearLayout
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="32dp"
-        android:gravity="center">
-
-        <Button
-            android:id="@+id/add_product_image_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="add Product Image"
-            style="@style/ButtonStyle"
-            />
-
-        <Button
-            android:id="@+id/add_product_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Done"
-            style="@style/ButtonStyle"
-            />
-
-    </LinearLayout>
 
 </LinearLayout>
 </ScrollView>
