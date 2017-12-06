@@ -25,4 +25,8 @@
     <string name="saved_failed">Failed To Save!</string>
     <string name="saved_successful">Saved Successful</string>
     <string name="image_added">Image Added!</string>
+    <string name="price_text">Price:</string>
+    <string name="quantity_text">Quantity:</string>
+    <string name="dollar_sign">$</string>
+    <string name="no_product_left">No Product Left!</string>
 </resources>

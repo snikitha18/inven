@@ -3,33 +3,25 @@ import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.database.ContentObserver;
 import android.database.Cursor;
 import android.net.Uri;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.mzdhr.bookstoreinventoryapp.R;
 import com.mzdhr.bookstoreinventoryapp.database.DatabaseContract;
-import com.mzdhr.bookstoreinventoryapp.model.Product;
 import com.mzdhr.bookstoreinventoryapp.ui.DetailsActivity;
-import com.mzdhr.bookstoreinventoryapp.ui.MainActivity;
-
-import static java.security.AccessController.getContext;
 
 /**
  * Created by mohammad on 12/4/17.
+ * Here I extend CursorAdapter not ArrayAdapter.
+ * Why -> CursorAdapter is better performance in UI Method in this case.
+ * Now this adapter ProductAdapter can use Cursor from Database Provider.
  */
 
 public class ProductAdapter extends CursorAdapter{
@@ -39,7 +31,6 @@ public class ProductAdapter extends CursorAdapter{
         super(context, cursor, 0);
     }
 
-
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
         return LayoutInflater.from(context).inflate(R.layout.list_item, parent, false);
@@ -48,9 +39,9 @@ public class ProductAdapter extends CursorAdapter{
     @Override
     public void bindView(View view, final Context context, Cursor cursor) {
         // FindViews
-        TextView productNameTextView = (TextView) view.findViewById(R.id.product_name_text_view);
-        TextView productPriceTextView = (TextView) view.findViewById(R.id.product_price_text_view);
-        TextView productQuantityTextView = (TextView) view.findViewById(R.id.product_quantity_text_view);
+        TextView productNameTextView = view.findViewById(R.id.product_name_text_view);
+        TextView productPriceTextView = view.findViewById(R.id.product_price_text_view);
+        TextView productQuantityTextView = view.findViewById(R.id.product_quantity_text_view);
         TextView productSellButton = (Button) view.findViewById(R.id.product_sell_button);
 
         // Get Indexes
@@ -65,10 +56,10 @@ public class ProductAdapter extends CursorAdapter{
         int productPrice = cursor.getInt(productPriceIndex);
         String productName = cursor.getString(productNameIndex);
 
-        // Setting Values
+        // Setting Values to views
         productNameTextView.setText(productName);
-        productPriceTextView.setText("Price: " + String.valueOf(productPrice) + "$");
-        productQuantityTextView.setText("Quantity: " + String.valueOf(productQuantityValue));
+        productPriceTextView.setText(context.getString(R.string.price_text) + String.valueOf(productPrice) + context.getString(R.string.dollar_sign));
+        productQuantityTextView.setText(context.getString(R.string.quantity_text) + String.valueOf(productQuantityValue));
 
         // Setting Listener onClick to Sell Button
         productSellButton.setOnClickListener(new View.OnClickListener() {
@@ -82,14 +73,16 @@ public class ProductAdapter extends CursorAdapter{
                     // Preparing the new Quantity value
                     ContentValues values = new ContentValues();
                     values.put(DatabaseContract.ProductEntry.COLUMN_PRODUCT_QUANTITY, newQuantityValue);
+
                     // Insert it into database
                     Uri updateSingleProductUri = ContentUris.withAppendedId(DatabaseContract.ProductEntry.CONTENT_URI_PRODUCT, productDatabaseIDValue);
                     int updatedStatus = context.getContentResolver().update(updateSingleProductUri, values, null, null);
                     Log.d(TAG, "onClick: is updated? ---> " + updatedStatus);
-                    // Notify the resolver to update the item UI
+
+                    // Notify the resolver to update the list item UI
                     context.getContentResolver().notifyChange(updateSingleProductUri, null);
                 } else {
-                    Toast.makeText(context, "No Product Left!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, R.string.no_product_left, Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -100,7 +93,7 @@ public class ProductAdapter extends CursorAdapter{
             @Override
             public void onClick(View v) {
                 // Getting current product uri, and putting it inside intent data,
-                // To send it to DetailsActivity, so it can use it to read details from Database.
+                // To send it to DetailsActivity, so it can use it to read detail's it from Database.
                 Uri currentProductUri = ContentUris.withAppendedId(DatabaseContract.ProductEntry.CONTENT_URI_PRODUCT, productDatabaseIDValue);
                 Intent intent = new Intent(context, DetailsActivity.class);
                 intent.setData(currentProductUri);
@@ -108,7 +101,5 @@ public class ProductAdapter extends CursorAdapter{
             }
         });
     }
-
-
 
 }
