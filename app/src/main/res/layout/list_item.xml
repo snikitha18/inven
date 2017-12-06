@@ -3,16 +3,9 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:background="@color/colorListItemBackground"
+              android:padding="8dp"
     >
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="16dp"
-        android:paddingBottom="20dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        >
 
         <TextView
             android:id="@+id/product_name_text_view"
@@ -22,51 +15,51 @@
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
             android:text="Invisible"
-            android:textSize="20sp"
+            android:textSize="24sp"
             android:textStyle="bold"
-            android:textColor="@color/colorProductName"
+            android:textColor="@color/colorListItemProductName"
             android:fontFamily="sans-serif"
             />
+
+    <TextView
+        android:id="@+id/product_price_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:text="108 $"
+        android:textSize="16sp"
+        android:textStyle="normal"
+        android:textColor="@color/colorListItemProductSubText"
+        android:fontFamily="sans-serif"
+        />
 
         <TextView
             android:id="@+id/product_quantity_text_view"
-            android:layout_below="@id/product_name_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="8dp"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
-            android:text="33"
+            android:text="33 - Pieces"
             android:textSize="16sp"
             android:textStyle="normal"
-            android:textColor="@color/colorProductName"
+            android:textColor="@color/colorListItemProductSubText"
             android:fontFamily="sans-serif"
             />
 
-        <TextView
-            android:id="@+id/product_price_text_view"
-            android:layout_below="@id/product_quantity_text_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="8dp"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:text="108 $"
-            android:textSize="16sp"
-            android:textStyle="normal"
-            android:textColor="@color/colorProductName"
-            android:fontFamily="sans-serif"
-            />
 
         <Button
             android:id="@+id/product_sell_button"
-            android:layout_below="@id/product_price_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="sell 1 piece"
-            android:layout_alignParentRight="true"
+            android:layout_gravity="right"
+            style="@style/ButtonSellStyle"
+            android:layout_marginBottom="8dp"
             />
 
-    </RelativeLayout>
+
 
 </LinearLayout>

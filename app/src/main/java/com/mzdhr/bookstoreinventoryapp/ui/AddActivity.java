@@ -1,6 +1,7 @@
 package com.mzdhr.bookstoreinventoryapp.ui;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -165,4 +168,27 @@ public class AddActivity extends AppCompatActivity {
         finish();
     }
 
+
+    // --------------
+    // Menu Section
+    // --------------
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.add_activity_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.add_image_book_menu_button:
+                Toast.makeText(AddActivity.this, "Image Added!", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.save_book_menu_button:
+                addProduct();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

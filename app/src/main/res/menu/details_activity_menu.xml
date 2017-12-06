@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context=".ui.MainActivity">
+
+    <item
+        android:orderInCategory="100"
+        android:id="@+id/edit_book_menu_button"
+        android:title="Edit Book"
+        android:icon="@drawable/ic_edit"
+        app:showAsAction="always" />
+
+    <item
+        android:orderInCategory="98"
+        android:id="@+id/delete_book_menu_button"
+        android:title="Delete Book"
+        android:icon="@drawable/ic_delete"
+        app:showAsAction="always" />
+
+    <item
+        android:orderInCategory="99"
+        android:id="@+id/order_more_book_menu_button"
+        android:title="Order More Book"
+        android:icon="@drawable/ic_contact_supplier"
+        app:showAsAction="always" />
+</menu>

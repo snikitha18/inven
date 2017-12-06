@@ -67,8 +67,8 @@ public class ProductAdapter extends CursorAdapter{
 
         // Setting Values
         productNameTextView.setText(productName);
-        productPriceTextView.setText(String.valueOf(productPrice));
-        productQuantityTextView.setText(String.valueOf(productQuantityValue));
+        productPriceTextView.setText(String.valueOf(productPrice) + " $");
+        productQuantityTextView.setText(String.valueOf(productQuantityValue) + " - Piece");
 
         // Setting Listener onClick to Sell Button
         productSellButton.setOnClickListener(new View.OnClickListener() {

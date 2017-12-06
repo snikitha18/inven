@@ -13,6 +13,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -84,10 +86,32 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     protected void onResume() {
         super.onResume();
-        // Trigger the Loader
-        Log.d(TAG, "onResume: !!!!!!!!!!!");
+        // Trigger the Loader again
         getLoaderManager().restartLoader(ALL_PRODUCT_LOADER, null, this);
     }
+
+
+    // --------------
+    // Menu Section
+    // --------------
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_activity_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.add_new_book_menu_button:
+                Intent intent = new Intent(MainActivity.this, AddActivity.class);
+                startActivity(intent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
 
     // --------------
@@ -127,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 //            Log.d(TAG, "onLoadFinished: Cursor is null or there is less than 1 row in the cursor");
 //            // Setting the Empty State view
 //            mEmptyStateTextView.setText(R.string.no_product_found_text);
-//            mEmptyStateImageView.setImageResource(R.drawable.no_product_found);
+//            mEmptyStateImageView.setImageResource(R.drawable.empty_products);
 //            return;
 //        }
 //

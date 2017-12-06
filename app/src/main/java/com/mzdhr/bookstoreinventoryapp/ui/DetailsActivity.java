@@ -14,6 +14,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -31,6 +33,8 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
     private static final int PRODUCT_SINGLE_LOADER = 1010;
     private boolean mModeEdit;
     private Uri mCurrentProductUri;
+
+    private MenuItem mEditIconMenuItem;
 
     // Views
     private ImageView mEditImageButton;
@@ -273,56 +277,46 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
         finish();
     }
 
-//    private void showDeleteConfirmationDialog() {
-//        // Create an AlertDialog.Builder and set the message, and click listeners
-//        // for the postivie and negative buttons on the dialog.
-//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//        builder.setMessage(R.string.delete_dialog_msg);
-//        builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
-//            public void onClick(DialogInterface dialog, int id) {
-//                // User clicked the "Delete" button, so delete the pet.
-//                deletePet();
-//            }
-//        });
-//        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-//            public void onClick(DialogInterface dialog, int id) {
-//                // User clicked the "Cancel" button, so dismiss the dialog
-//                // and continue editing the pet.
-//                if (dialog != null) {
-//                    dialog.dismiss();
-//                }
-//            }
-//        });
-//
-//        // Create and show the AlertDialog
-//        AlertDialog alertDialog = builder.create();
-//        alertDialog.show();
-//    }
+    // --------------
+    // Menu Section
+    // --------------
 
-//    private void deletePet() {
-//        // Only perform the delete if this is an existing pet.
-//        if (mCurrentPetUri != null) {
-//            // Call the ContentResolver to delete the pet at the given content URI.
-//            // Pass in null for the selection and selection args because the mCurrentPetUri
-//            // content URI already identifies the pet that we want.
-//            int rowsDeleted = getContentResolver().delete(mCurrentPetUri, null, null);
-//
-//            // Show a toast message depending on whether or not the delete was successful.
-//            if (rowsDeleted == 0) {
-//                // If no rows were deleted, then there was an error with the delete.
-//                Toast.makeText(this, getString(R.string.editor_delete_pet_failed),
-//                        Toast.LENGTH_SHORT).show();
-//            } else {
-//                // Otherwise, the delete was successful and we can display a toast.
-//                Toast.makeText(this, getString(R.string.editor_delete_pet_successful),
-//                        Toast.LENGTH_SHORT).show();
-//            }
-//        }
-//
-//        // Close the activity
-//        finish();
-//    }
-    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.details_activity_menu, menu);
+        mEditIconMenuItem = menu.findItem(R.id.edit_book_menu_button);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.edit_book_menu_button:
+                if (mModeEdit){
+                    disableEditing();
+                    saveChanges();
+                    mEditIconMenuItem.setIcon(R.drawable.ic_edit);
+                } else {
+                    enableEditing();
+                    mEditIconMenuItem.setIcon(R.drawable.ic_save);
+                }
+                break;
+
+            case R.id.delete_book_menu_button:
+                deleteConfirmation();
+                break;
+
+            case R.id.order_more_book_menu_button:
+                // TODO: 12/6/17 Contact the supplier Dialog, by mail or phone!
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    // --------------
+    // Loader Section
+    // --------------
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         String[] projection = {
@@ -375,4 +369,6 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
     public void onLoaderReset(Loader<Cursor> loader) {
 
     }
+
+
 }
