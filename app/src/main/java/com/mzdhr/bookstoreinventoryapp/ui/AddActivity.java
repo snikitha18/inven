@@ -1,10 +1,12 @@
 package com.mzdhr.bookstoreinventoryapp.ui;
 
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import android.content.ContentValues;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.appbar.AppBarLayout;
+import androidx.appcompat.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -13,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import com.mzdhr.bookstoreinventoryapp.R;
 import com.mzdhr.bookstoreinventoryapp.database.DatabaseContract;
 

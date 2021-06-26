@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/BookStoreInventoryApp.iml" filepath="$PROJECT_DIR$/BookStoreInventoryApp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BookStore-InventoryApp.iml" filepath="$PROJECT_DIR$/BookStore-InventoryApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/BookStore-InventoryApp.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/BookStore-InventoryApp.app.iml" />
     </modules>
   </component>
 </project>
